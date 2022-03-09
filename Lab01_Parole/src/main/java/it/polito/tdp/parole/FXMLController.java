@@ -3,6 +3,7 @@ package it.polito.tdp.parole;
 import it.polito.tdp.parole.model.Parole;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -31,16 +32,57 @@ public class FXMLController {
 
     @FXML
     private Button btnReset;
+    
+    @FXML
+    private Button btnCancella;
+    
+    @FXML
+    private TextArea textTime;
 
     @FXML
     void doInsert(ActionEvent event) {
-    	// TODO
+    	String parola=txtParola.getText();
+    	elenco.addParola(parola);
+    	String el="";
+
+    	List <String>lista=elenco.getElenco();
+    	for(String r: lista) {
+    		el+=r+"\n";
+    	}
+    	txtResult.setText(el);
+    	textTime.setText(""+System.nanoTime());
+
     }
 
     @FXML
     void doReset(ActionEvent event) {
-    	// TODO
+    	String el="";
+    	elenco.reset();
+    	List <String>lista=elenco.getElenco();
+    	for(String r: lista) {
+    		el+=r+"\n";
+    	}
+    	txtResult.setText(el);
+    	textTime.setText(""+System.nanoTime());
+    	
+
     }
+    @FXML
+    void doCancella(ActionEvent event) {
+    	
+    	String c=txtResult.getSelectedText();
+    	elenco.cancella(c);
+     	String el="";
+    	List <String>lista=elenco.getElenco();
+    	for(String r: lista) {
+    		el+=r+"\n";
+    	}
+    	txtResult.setText(el);
+    	textTime.setText(""+System.nanoTime());
+    	
+    }
+    
+    
 
     @FXML
     void initialize() {
